@@ -1,25 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
+import App from './components/App'
 import { createStore } from 'redux'
+import { todos } from './reducers/todos'
 import * as serviceWorker from './serviceWorker'
 
-const counter = (state = 0, action) => {
-    console.log("action called : " + action);
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + 1
-        case 'DECREMENT':
-            return state - 1
-        default:
-            return state
-    }
+var store = createStore(todos)
+const onClick = (value) => store.dispatch({type: 'ADD_TODO', text: value})
+const render = () => {
+    ReactDOM.render(<App onClick={onClick} todos={store.getState()}/>, document.getElementById('root'))
 }
-
-var store = createStore(counter)
-const onClick = () => store.dispatch({type: 'INCREMENT'})
-const render = () => ReactDOM.render(<App onClick={onClick} value={store.getState()}/>, document.getElementById('root'))
 store.subscribe(render)
 
 render()
