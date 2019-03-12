@@ -6,6 +6,12 @@ const todo = (state = undefined, action) => {
                 text: action.text,
                 isComplete: false
             }
+        case 'TOGGLE_TODO':
+            return {
+                id: action.id,
+                text: state.text,
+                isComplete: !state.isComplete
+            }
         default:
             return state
     }
@@ -18,6 +24,12 @@ export const todos = (state = [], action) => {
             return [
                 ...state,
                 todo(state, action)
+            ]
+        case 'TOGGLE_TODO':
+            return [
+                ...state.slice(0, action.id),
+                todo(state[action.id], action),
+                ...state.slice(action.id+1)
             ]
         default:
             return state
