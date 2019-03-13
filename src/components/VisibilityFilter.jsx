@@ -3,11 +3,16 @@ import FilterLink from "./FilterLink";
 
 export default class VisibilityFilter extends PureComponent {
     render = () => {
+        const {onClick, currentVisibilityFilter} = this.props
+        const isCurrent = (visibilityFilter) => currentVisibilityFilter === visibilityFilter
+
+        const renderFilterLink = (filter, label) => <FilterLink onClick={() => {return onClick(filter)}} isCurrent={isCurrent(filter)}>{label}</FilterLink>
+
         return (
             <div>
-                <FilterLink onClick={() => { return this.props.onClick('COMPLETED')}}>Completed</FilterLink>
-                <FilterLink onClick={() => { return this.props.onClick('INCOMPLETE')}}>Todo</FilterLink>
-                <FilterLink onClick={() => { return this.props.onClick('SHOW_ALL')}}>Show All</FilterLink>
+                {renderFilterLink('COMPLETED', 'completed')}
+                {renderFilterLink('INCOMPLETE', 'incomplete')}
+                {renderFilterLink('SHOW_ALL', 'show all')}
             </div>
         )
     }
