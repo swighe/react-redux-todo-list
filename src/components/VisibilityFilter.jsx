@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
+import FilterLink from "./FilterLink";
 
 export default class VisibilityFilter extends PureComponent {
     render = () => {
         return (
             <div>
-                <button onClick={() => { return this.props.onClick('COMPLETED')}}>Completed</button>
-                <button onClick={() => { return this.props.onClick('INCOMPLETE')}}>Todo</button>
-                <button onClick={() => { return this.props.onClick('SHOW_ALL')}}>Show All</button>
+                <FilterLink onClick={() => { return this.props.onClick('COMPLETED')}}>Completed</FilterLink>
+                <FilterLink onClick={() => { return this.props.onClick('INCOMPLETE')}}>Todo</FilterLink>
+                <FilterLink onClick={() => { return this.props.onClick('SHOW_ALL')}}>Show All</FilterLink>
             </div>
         )
     }
