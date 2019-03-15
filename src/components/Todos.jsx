@@ -1,39 +1,28 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Todo from './Todo'
-import _ from 'lodash'
+import map from 'lodash/map'
 
-export default class Todos extends PureComponent {
-    renderTodo = (todo) => {
+const Todos = ({todos, onToggleTodo}) => {
+    const renderTodo = (todo) => {
+        console.log("renderTodo : " + onToggleTodo)
         return (
-            <Todo id={todo.id} text={todo.text} isComplete={todo.isComplete} onClick={this.props.onToggleTodo}/>
+           <div>
+               <Todo {...todo} onClick={onToggleTodo}/>
+           </div>
         )
     }
-
-    filterTodo = (todo, visibilityFilter) => {
-        console.log("todo:" + todo + ", visibilityFilter:" + visibilityFilter)
-        const filterMatchesTodoFilter = (todo, visibilityFilter) => {
-            switch (visibilityFilter) {
-                case 'COMPLETED':
-                    return todo.isComplete === true
-                case 'INCOMPLETE':
-                    return todo.isComplete === false
-                case 'SHOW_ALL':
-                default:
-                    return true;
-            }
-        }
-
-        return !_.isNil(visibilityFilter) && filterMatchesTodoFilter(todo, visibilityFilter);
-    }
-
-    render = () => {
-        console.log("todos:" + this.props.todos)
-        return (
-        <div>
-            <ol>
-                {_.filter(this.props.todos, (todo) => this.filterTodo(todo, this.props.visibilityFilter)).map(todo => {return <li key={todo.id}>{this.renderTodo(todo)}</li>})}
-            </ol>
-        </div>
-        )
-    }
+    console.log("Todos.jsx : props todos : " + todos)
+    return (
+    <div>
+        <ol>
+            {map(todos,  todo => {
+                    console.log("todos.jsx : each todo : " + todo)
+                    return <li key={todo.id}>{renderTodo(todo)}</li>
+                }
+            )}
+        </ol>
+    </div>
+    )
 }
+
+export default Todos

@@ -1,23 +1,17 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './App.css';
-import Todos from './Todos'
-import AddTodo from './AddTodo'
-import VisibilityFilter from './VisibilityFilter'
+import AllTodos from '../container/AllTodos'
+import AddTodo from '../container/AddTodo'
+import Footer from './Footer'
 
-class App extends PureComponent {
-
-
-  render() {
-    console.log("props : " + this.props)
-
-    return (
-      <div className="App">
-        <AddTodo onClick={this.props.onAddTodo}/>
-        <Todos todos={this.props.todos} visibilityFilter={this.props.visibilityFilter} onToggleTodo={this.props.onToggleTodo}></Todos>
-        <VisibilityFilter onClick={this.props.onSetVisibilityFilter} currentVisibilityFilter={this.props.visibilityFilter}/>
-      </div>
-    );
-  }
+const App = () => {
+return (
+  <div className="App">
+    <AddTodo/>
+    <AllTodos/>
+    <Footer/>
+  </div>
+);
 }
 
-export default App;
+export default App

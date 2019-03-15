@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 
 export default class FilterLink extends PureComponent {
     render = () => {
+        console.log("FilterLink called with props: " + this.props.isCurrent)
         if (this.props.isCurrent)
-            return (<span>{this.props.children}</span>)
+            return (<span>{this.props.label}</span>)
 
         return (
             <a href='#' onClick={
@@ -12,7 +13,7 @@ export default class FilterLink extends PureComponent {
                     this.props.onClick()
                 }
             }>
-                {'  ' + this.props.children}
+                {'  ' + this.props.label}
             </a>
         )
     }

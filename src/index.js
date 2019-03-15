@@ -6,22 +6,16 @@ import { createStore, combineReducers } from 'redux'
 import { todos } from './reducers/todos'
 import { visibilityFilter } from './reducers/visibilityFilter'
 import * as serviceWorker from './serviceWorker'
+import { Provider } from 'react-redux'
 
 var todoApp = combineReducers({todos, visibilityFilter})
 var store = createStore(todoApp)
-const onAddTodo = (value) => store.dispatch({type: 'ADD_TODO', text: value})
-const onSetVisibilityFilter = (visibilityFilter) => store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: visibilityFilter})
-const onToggleTodo = (id) => store.dispatch({type: 'TOGGLE_TODO', id: id})
 const render = () => {
-    console.log(store.getState())
     ReactDOM.render(
-        <App
-            onAddTodo={onAddTodo}
-            onSetVisibilityFilter={onSetVisibilityFilter}
-            todos={store.getState().todos}
-            visibilityFilter={store.getState().visibilityFilter}
-            onToggleTodo={onToggleTodo}
-        />, document.getElementById('root'))
+        <Provider store={store}>
+            <App/>
+        </Provider>
+        , document.getElementById('root'))
 }
 store.subscribe(render)
 
